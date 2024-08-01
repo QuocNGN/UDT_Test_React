@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -5,6 +6,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const ESLintPlugin = require('eslint-webpack-plugin')
 const Dotenv = require('dotenv-webpack')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const webpack = require('webpack')
@@ -121,6 +123,10 @@ module.exports = (env, argv) => {
         template: path.resolve(__dirname, 'public', 'index.html'),
         filename: 'index.html'
       }),
+      // Thêm eslint cho webpack
+      new ESLintPlugin({
+        extensions: ['.tsx', '.ts', '.js', '.jsx']
+      })
     ]
   }
 
