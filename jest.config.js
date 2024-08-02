@@ -1,13 +1,20 @@
 module.exports = {
+  verbose: true,
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['<rootDir>/setupTests.js'], // (Optional) Configure testing environment setup
   moduleNameMapper: {
-    '^.+\\.(css|scss)$': '<rootDir>/node_modules/identity-obj-proxy', // Mock CSS imports
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+      '<rootDir>/src/__mocks__/fileMock.ts',
+    '\\.(css|less)$': '<rootDir>/src/__mocks__/styleMock.ts',
   },
-  transform: {
-    '^.+\\.(ts|tsx)$': 'ts-jest',
+  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
+  collectCoverageFrom: ['**/*.{ts,tsx}', '!**/*.d.ts', '!**/node_modules/**', '!**/vendor/**'],
+  coverageThreshold: {
+    global: {
+      branches: 100,
+      functions: 100,
+      lines: 100,
+      statements: 100,
+    },
   },
-  collectCoverage: true, // Optionally enable code coverage collection
-  coverageReporters: ['json-summary', 'lcov'], // Optionally define coverage reporters
 };
