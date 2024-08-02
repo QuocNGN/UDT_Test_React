@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders app component 1`] = `
+<div>
+  <div
+    class="app"
+    role="main"
+  >
+    <header
+      class="app-header"
+    >
+      <p>
+        Edit 
+        <code>
+          src/app.tsx
+        </code>
+         and save to reload.
+      </p>
+      <h1>
+        Hello World
+      </h1>
+    </header>
+  </div>
+</div>
+`;
