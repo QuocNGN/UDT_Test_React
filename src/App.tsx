@@ -1,13 +1,46 @@
-import React from 'react'
+import { useState } from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Calculator from './components/Calculator'
+import History from './components/History'
 import './assets/styles/app.scss'
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <div className='App'>
-        <Calculator />
-      </div>
-    )
+export interface HistoryEntry {
+  expression: string
+  result: string
+}
+
+export default function App() {
+  const [history, setHistory] = useState<HistoryEntry[]>(() => {
+    return JSON.parse(localStorage.getItem('calcHistory') || '[]')
+  })
+
+  const addHistory = (entry: HistoryEntry) => {
+    const updatedHistory = [...history, entry]
+    setHistory(updatedHistory)
+    localStorage.setItem('calcHistory', JSON.stringify(updatedHistory))
   }
+
+  const clearHistory = () => {
+    setHistory([])
+    localStorage.removeItem('calcHistory')
+  }
+
+  return (
+    <div className='App'>
+      <Router>
+        <Routes>
+          <Route path='/' element={<Calculator addHistory={addHistory} />} />
+          <Route
+            path='/history'
+            element={
+              <div className='layout'>
+                <Calculator addHistory={addHistory} />
+                <History history={history} clearHistory={clearHistory} />
+              </div>
+            }
+          />
+        </Routes>
+      </Router>
+    </div>
+  )
 }

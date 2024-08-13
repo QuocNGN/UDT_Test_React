@@ -15,8 +15,6 @@ $button-height: 78px;
 
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(to right, #3d1866, #fb2795);
-  background: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
   background: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
   color: #fff;
   margin: 0;
@@ -40,30 +38,32 @@ body {
   margin: 0 auto;
   overflow: hidden;
   background-color: $background;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  box-shadow:
+    rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
 
-   // Exclude the icon-wrapper from the grid styles
-   .icon-wrapper {
-    grid-template-rows: initial;// Ensures it spans the entire width of the grid
+  // Exclude the icon-wrapper from the grid styles
+  .icon-wrapper {
+    grid-template-rows: initial; // Ensures it spans the entire width of the grid
     display: flex; // Use flexbox to layout icons
     justify-content: center;
     align-items: center;
     margin: 10px 0 0 10px;
-    gap: .5rem; // Space between icons
+    gap: 0.5rem; // Space between icons
     .icon {
       width: 20px;
       height: 20px;
       border-radius: 100px;
-  
+
       &.Red {
         // margin-left: 15px;
         background-color: #fb5f5b;
       }
-  
+
       &.Yellow {
         background-color: #fbba3f;
       }
-  
+
       &.Blue {
         background-color: #33c547;
       }
@@ -133,5 +133,103 @@ body {
   font-size: 2rem;
 }
 
+.layout {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+// .calculator {
+//   flex: 1;
+// }
+
 .history {
+  position: relative;
+  // flex: 1;
+  // max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: $background;
+  text-align: center;
+  max-height: 100%;
+  border-radius: 10px;
+  width: 300px;
+  box-shadow:
+    rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px;
+  ul {
+    background-color: #fff;
+    border-radius: 5px;
+    width: 85%;
+    height: 65%;
+    max-height: 400px;
+    color: #000;
+    overflow-y: scroll;
+    font-size: 22px;
+  }
+}
+
+.button-clear {
+  background-color: #f44336;
+  color: $white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  outline: none;
+  width: fit-content;
+  height: fit-content;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  gap: 10px;
+  border-radius: 5px;
+  padding: 10px;
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: .2s ease;
+
+  &:hover {
+    // background-color: #d32f2f; /* Darker red */
+    background-color: #d5382d;
+  }
+}
+
+@media (max-width: 737px) {
+  body {
+    height: auto;
+    min-height: 150vh;
+    display: block; 
+    padding: 0; 
+    margin: 0; 
+  }
+
+  .layout {
+    margin-top: 20px;
+  }
+
+  .history {
+    width: 90%;
+    ul {
+      height: 300px; 
+      max-height: none; 
+      color: #000;
+      overflow-y: auto; 
+      font-size: 22px;
+    }
+  }
+
+  .button-clear {
+    // position: relative;
+    position: initial;
+    transform: initial;
+    margin: 10px auto; // Đặt margin tự động để căn giữa
+  }
 }
