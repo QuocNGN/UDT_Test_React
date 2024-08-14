@@ -34,7 +34,7 @@ body {
   // background-color: $background;
   border-radius: 20px;
   width: fit-content;
-  height: fit-content !important;
+  height: fit-content;
   margin: 0 auto;
   overflow: hidden;
   background-color: $background;
@@ -155,6 +155,7 @@ body {
 
   background-color: $background;
   text-align: center;
+  height: 550px;
   max-height: 100%;
   border-radius: 10px;
   width: 300px;
@@ -217,6 +218,7 @@ body {
 
   .history {
     width: 90%;
+    height: fit-content;
     ul {
       height: 300px; 
       max-height: none; 

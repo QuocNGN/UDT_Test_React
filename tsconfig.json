@@ -22,11 +22,14 @@
     "jsx": "react-jsx",
     "baseUrl": "."
   },
-  "include": ["src"],
+  "include": ["src", "jest.setup.js"],
   "exclude": ["node_modules", "build", "coverage", "webpack.*.js", "*.config.js", "*.test.ts*"],
   "ts-node": {
     "compilerOptions": {
-      "module": "CommonJS"
+      "target": "ES2015",
+      "module": "ESNext",
+      "moduleResolution": "Node",
+      "jsx": "react-jsx"
     }
   }
 }
