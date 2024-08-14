@@ -91,6 +91,7 @@ module.exports = (env, argv) => {
       port: 3000, // Chạy port 3000 khi dev
       historyApiFallback: true, // Phải set true nếu không khi bạn dùng lazyload module React thì sẽ gặp lỗi không load được file.
       // Cấu hình phục vụ file html trong public
+      open: true, // Tự động mở trình duyệt khi server khởi động
       static: {
         directory: path.resolve(__dirname, 'public', 'index.html'),
         serveIndex: true,
