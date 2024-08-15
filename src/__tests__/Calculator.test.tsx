@@ -135,6 +135,86 @@ describe('Calculator Component', () => {
     expect(screen.getByText('Cannot divide by zero')).toBeInTheDocument()
   })
 
+  it('should handle Division Operators numbers', () => {
+    render(<Calculator addHistory={mockAddHistory} />)
+    fireEvent.click(screen.getByText('9'))
+    fireEvent.click(screen.getByText('.'))
+    fireEvent.click(screen.getByText('9'))
+    fireEvent.click(screen.getByText('÷'))
+    fireEvent.click(screen.getByText('3'))
+    fireEvent.click(screen.getByText('='))
+    expect(screen.getByText('3.3000000000000003')).toBeInTheDocument()
+  })
+
+  it('should handle a sequence of operations', () => {
+    render(<Calculator addHistory={mockAddHistory} />)
+    fireEvent.click(screen.getByText('2'))
+    fireEvent.click(screen.getByText('+'))
+    fireEvent.click(screen.getByText('3'))
+    fireEvent.click(screen.getByText('x'))
+    fireEvent.click(screen.getByText('4'))
+    fireEvent.click(screen.getByText('='))
+    expect(screen.getByText('20')).toBeInTheDocument()
+  })
+
+  it('should prevent multiple decimal points in a single number', () => {
+    render(<Calculator addHistory={mockAddHistory} />)
+    fireEvent.click(screen.getByText('7'))
+    fireEvent.click(screen.getByText('.'))
+    fireEvent.click(screen.getByText('5'))
+    fireEvent.click(screen.getByText('.'))
+    expect(screen.getByText('7.5')).toBeInTheDocument() // Ensure only one decimal point
+  })
+
+  it('should handle large numbers correctly', () => {
+    render(<Calculator addHistory={mockAddHistory} />)
+    fireEvent.click(screen.getByText('9'))
+    for (let i = 0; i < 10; i++) {
+      fireEvent.click(screen.getByText('0'))
+    }
+    expect(screen.getByText('90000000000')).toBeInTheDocument()
+  })
+
+  it('should clear the current entry when "C" is clicked', () => {
+    render(<Calculator addHistory={mockAddHistory} />)
+    fireEvent.click(screen.getByText('7'))
+    fireEvent.click(screen.getByText('8'))
+    fireEvent.click(screen.getByText('C'))
+    expect(screen.getByText('0')).toBeInTheDocument()
+  })
+
+  it('should chain multiple operations correctly', () => {
+    render(<Calculator addHistory={mockAddHistory} />)
+    fireEvent.click(screen.getByText('5'))
+    fireEvent.click(screen.getByText('+'))
+    fireEvent.click(screen.getByText('3'))
+    fireEvent.click(screen.getByText('x'))
+    fireEvent.click(screen.getByText('2'))
+    fireEvent.click(screen.getByText('='))
+    expect(screen.getByText('16')).toBeInTheDocument()
+  })
+
+  it('should handle multiple decimal points correctly', () => {
+    render(<Calculator addHistory={mockAddHistory} />)
+    fireEvent.click(screen.getByText('7'))
+    fireEvent.click(screen.getByText('.'))
+    fireEvent.click(screen.getByText('.'))
+    fireEvent.click(screen.getByText('8'))
+    expect(screen.getByText('7.8')).toBeInTheDocument() // Should not add an extra decimal point
+  })
+
+  it('should clear all entries when "AC" is clicked', () => {
+    render(<Calculator addHistory={mockAddHistory} />)
+    fireEvent.click(screen.getByText('7'))
+    fireEvent.click(screen.getByText('8'))
+    fireEvent.click(screen.getByText('+'))
+    fireEvent.click(screen.getByText('1'))
+    fireEvent.click(screen.getByText('C'))
+    fireEvent.click(screen.getByText('1'))
+    fireEvent.click(screen.getByText('='))
+    expect(screen.getByText('79')).toBeInTheDocument()
+  })
+
   it('should handle Percent numbers', () => {
     render(<Calculator addHistory={mockAddHistory} />)
     fireEvent.click(screen.getByText('9'))

@@ -84,7 +84,9 @@ module.exports = (env, argv) => {
     output: {
       filename: 'static/js/main.[contenthash:6].js', // Thêm mã hash tên file dựa vào content để tránh bị cache bởi CDN hay browser.
       path: path.resolve(__dirname, 'dist'), // Build ra thư mục dist
-      publicPath: '/'
+      publicPath: '/',
+      clean: true,
+      assetModuleFilename: '[path][name][ext]'
     },
     devServer: {
       hot: true, // enable Hot Module Replacement, kiểu như reload nhanh
