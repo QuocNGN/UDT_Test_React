@@ -1,3 +1,9 @@
+# React Typescript Calculator App
+Simple React Typescript Calculator App
+
+live demo: https://caculator-udt-react.vercel.app/ <br>
+live demo (history): https://caculator-udt-react.vercel.app/history <br>
+
 # Explains Typescript compile workflow
 To compile TypeScript code into JavaScript, follow these steps:
 
