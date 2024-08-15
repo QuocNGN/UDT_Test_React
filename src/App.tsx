@@ -28,8 +28,6 @@ export default function App() {
   return (
     <div className='App'>
       <Router>
-        {' '}
-        {/* Đảm bảo Router chỉ xuất hiện một lần */}
         <Routes>
           <Route path='/' element={<Calculator addHistory={addHistory} />} />
           <Route

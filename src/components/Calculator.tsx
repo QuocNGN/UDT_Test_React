@@ -1,5 +1,5 @@
 import { TbPlusMinus } from 'react-icons/tb'
-import { Reducer, useReducer, useState } from 'react'
+import { Reducer, useEffect, useReducer, useRef, useState } from 'react'
 import { actionProps, calcReducer, solveOperation } from '../Reducer/calculatorReducer'
 import { HistoryEntry } from '../App'
 
@@ -15,6 +15,24 @@ export default function Calculator({ addHistory }: { addHistory: (entry: History
   const [state, dispatch] = useReducer<Reducer<any, actionProps>>(calcReducer, initialState)
   const [operator, setOperator] = useState(operatorInit)
   const [buttonText, setButtonText] = useState('AC')
+
+  const displayRef = useRef<HTMLDivElement>(null)
+
+  // useEffect để thay đổi kích thước chữ dựa trên độ dài của chuỗi số
+  useEffect(() => {
+    if (displayRef.current) {
+      const length = state.join('').length
+      displayRef.current.className = 'curr' // Reset class
+
+      if (length > 10 && length <= 12) {
+        displayRef.current.classList.add('small')
+      } else if (length > 12 && length <= 14) {
+        displayRef.current.classList.add('smaller')
+      } else if (length > 14) {
+        displayRef.current.classList.add('smallest')
+      }
+    }
+  }, [state])
 
   const handleAdd = (e: React.MouseEvent<HTMLButtonElement>) => {
     dispatch({
@@ -120,7 +138,9 @@ export default function Calculator({ addHistory }: { addHistory: (entry: History
         <div className='prev'>
           {operator.value} {operator.symbol}
         </div>
-        <div className='curr'>{state}</div>
+        <div className='curr' ref={displayRef}>
+          {state.join('').slice(0, 21)} {/* Limit to 18 digits */}
+        </div>
       </div>
 
       <button onClick={handleRemove} className='button-top'>
