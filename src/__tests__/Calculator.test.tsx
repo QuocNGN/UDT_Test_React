@@ -88,6 +88,42 @@ describe('Calculator Component', () => {
   //   expect(screen.getByText('-6')).toBeInTheDocument() // Expect '-6' instead of '3'
   // })
 
+  it('should handle Addition decimal number input', () => {
+    render(<Calculator addHistory={mockAddHistory} />)
+    fireEvent.click(screen.getByText('1'))
+    fireEvent.click(screen.getByText('.'))
+    fireEvent.click(screen.getByText('5'))
+    fireEvent.click(screen.getByText('+'))
+    fireEvent.click(screen.getByText('1'))
+    fireEvent.click(screen.getByText('.'))
+    fireEvent.click(screen.getByText('1'))
+    fireEvent.click(screen.getByText('='))
+    expect(screen.getByText('2.6')).toBeInTheDocument()
+  })
+  it('should handle Subtraction decimal with integer number input', () => {
+    render(<Calculator addHistory={mockAddHistory} />)
+    fireEvent.click(screen.getByText('9'))
+    fireEvent.click(screen.getByText('.'))
+    fireEvent.click(screen.getByText('3'))
+    fireEvent.click(screen.getByText('3'))
+    fireEvent.click(screen.getByText('3'))
+    fireEvent.click(screen.getByText('-'))
+    fireEvent.click(screen.getByText('3'))
+    fireEvent.click(screen.getByText('='))
+    expect(screen.getByText('6.333')).toBeInTheDocument()
+  })
+
+  it('should handle Addition decimal with integer number input', () => {
+    render(<Calculator addHistory={mockAddHistory} />)
+    fireEvent.click(screen.getByText('1'))
+    fireEvent.click(screen.getByText('.'))
+    fireEvent.click(screen.getByText('3'))
+    fireEvent.click(screen.getByText('+'))
+    fireEvent.click(screen.getByText('1'))
+    fireEvent.click(screen.getByText('='))
+    expect(screen.getByText('2.3')).toBeInTheDocument()
+  })
+
   it('should handle Change Operators numbers', () => {
     render(<Calculator addHistory={mockAddHistory} />)
     fireEvent.click(screen.getByText('9'))

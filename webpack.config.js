@@ -84,7 +84,7 @@ module.exports = (env, argv) => {
     output: {
       filename: 'static/js/main.[contenthash:6].js', // Thêm mã hash tên file dựa vào content để tránh bị cache bởi CDN hay browser.
       path: path.resolve(__dirname, 'dist'), // Build ra thư mục dist
-      publicPath: '/my-app/'
+      publicPath: '/'
     },
     devServer: {
       hot: true, // enable Hot Module Replacement, kiểu như reload nhanh
@@ -98,8 +98,7 @@ module.exports = (env, argv) => {
         watch: true // khi thay đổi content trong index.html thì cũng sẽ reload
       }
     },
-    // devtool: isProduction ? false : 'source-map',
-    devtool: 'source-map',
+    devtool: isProduction ? false : 'source-map',
     plugins: [
       // Đưa css ra thành một file .css riêng biệt thay vì bỏ vào file .js
       new MiniCssExtractPlugin({
@@ -128,7 +127,8 @@ module.exports = (env, argv) => {
       // Thêm eslint cho webpack
       new ESLintPlugin({
         extensions: ['.tsx', '.ts', '.js', '.jsx']
-      })
+      }),
+      new CleanWebpackPlugin() // Dọn dẹp thư mục build trước khi build mới
     ]
   }
 
