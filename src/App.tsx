@@ -4,38 +4,20 @@ import Calculator from './components/Calculator'
 import History from './components/History'
 import './assets/styles/app.scss'
 
-export interface HistoryEntry {
-  expression: string
-  result: string
-}
-
 export default function App() {
-  const [history, setHistory] = useState<HistoryEntry[]>(() => {
-    return JSON.parse(localStorage.getItem('calcHistory') || '[]')
-  })
-
-  const addHistory = (entry: HistoryEntry) => {
-    const updatedHistory = [...history, entry]
-    setHistory(updatedHistory)
-    localStorage.setItem('calcHistory', JSON.stringify(updatedHistory))
-  }
-
-  const clearHistory = () => {
-    setHistory([])
-    localStorage.removeItem('calcHistory')
-  }
+  const [history, setHistory] = useState<string[]>([])
 
   return (
     <div className='App'>
       <Router>
         <Routes>
-          <Route path='/' element={<Calculator addHistory={addHistory} />} />
+          <Route path='/' element={<Calculator history={history} setHistory={setHistory} />} />
           <Route
             path='/history'
             element={
               <div className='layout'>
-                <Calculator addHistory={addHistory} />
-                <History history={history} clearHistory={clearHistory} />
+                <Calculator history={history} setHistory={setHistory} />
+                <History history={history} setHistory={setHistory} />
               </div>
             }
           />

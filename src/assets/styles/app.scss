@@ -44,16 +44,18 @@ body {
 
   // Exclude the icon-wrapper from the grid styles
   .icon-wrapper {
-    grid-template-rows: initial; // Ensures it spans the entire width of the grid
-    display: flex; // Use flexbox to layout icons
-    justify-content: center;
-    align-items: center;
-    margin: 10px 0 0 10px;
-    gap: 0.5rem; // Space between icons
+    display: grid;
+    grid-template-columns: 1fr auto; // Tạo hai cột: một cột rộng và một cột tự động
+    grid-column: 1 / -1;
+    align-items: center; // Căn giữa theo chiều dọc
+    padding: 13px 12px 0px;
     .icon {
-      width: 20px;
+      display: flex;
+      gap: 10px;
+      justify-content: flex-start;
+      width: 80px;
       height: 20px;
-      border-radius: 100px;
+      border-radius: 100%;
 
       &.Red {
         // margin-left: 15px;
@@ -66,6 +68,16 @@ body {
 
       &.Blue {
         background-color: #33c547;
+      }
+    }
+    .history-btn {
+      display: flex;
+      align-items: center; // Căn giữa theo chiều dọc nếu cần
+      font-size: 26px !important;
+      cursor: pointer;
+      transition: .25s;
+      &:active {
+        transform: translateX(-2px) translateY(-2px);
       }
     }
   }
@@ -113,43 +125,53 @@ body {
   border-radius: -10px;
 }
 
-.output {
-  // background-color: #0b091e;
+.output-box {
   grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  justify-content: space-around;
-  padding: 0.6rem;
+  justify-content: end;
+  row-gap: 10px;
   word-wrap: break-word;
   word-break: break-all;
 }
 
-.prev {
-  color: rgba(255, 255, 255, 0.753);
+.result-box {
+  text-align: right;
+  padding-right: 10px;
+  font-size: 15px;
+  color: #c5cbd1;
 }
 
-.curr {
-  font-size: 3rem;
+.input-box {
+  overflow: hidden;
+  margin: 0px 6px 10px 0px;
+  height: auto;
+  font-size: 43px;
+  line-height: 38px;
+  width: 95%;
+}
+
+.input-box #calculation {
+  width: auto;
+  user-select: text;
+  float: right;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-  transition: font-size 0.1s ease;
-
-  &.small {
-    font-size: 2.5rem; // Tăng giá trị font-size
-  }
-
-  &.smaller {
-    font-size: 2rem; // Tăng giá trị font-size
-  }
-
-  &.smallest {
-    font-size: 1.8rem; // Tăng giá trị font-size
-  }
+  transition: 0.2s ease;
+  // text-overflow: ellipsis; /* Đoạn văn bản dài hơn chiều rộng sẽ được cắt bớt với dấu ba chấm */
 }
 
+.small-text {
+  font-size: 35px; /* Kích thước chữ nhỏ hơn khi dài */
+}
+
+/* Đảm bảo các nút không bị thay đổi kích thước */
+.btn {
+  cursor: pointer;
+  width: 87px;
+  margin: 4px;
+}
 .layout {
   display: flex;
   gap: 20px;
