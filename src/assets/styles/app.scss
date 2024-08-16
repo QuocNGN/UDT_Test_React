@@ -213,6 +213,18 @@ body {
     font-size: 22px;
     word-wrap: break-word;
   }
+  li.display-empty {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    // gap: 10px;
+    // justify-content: center;
+    align-items: center;
+    justify-content: center;
+    svg {
+      font-size: 62px;
+    }
+  }
 }
 
 .button-clear {
