@@ -1,19 +1,31 @@
-import { HistoryEntry } from '../App'
-import { FaTrash } from 'react-icons/fa'
+import React from 'react'
 
-const History = ({ history, clearHistory }: { history: HistoryEntry[]; clearHistory: () => void }) => {
+interface HistoryProps {
+  history: string[]
+  setHistory: React.Dispatch<React.SetStateAction<string[]>>
+}
+
+const History: React.FC<HistoryProps> = ({ history, setHistory }) => {
+  const handleClearHistory = () => {
+    setHistory([])
+  }
+
   return (
     <div className='history'>
-      <h1>History</h1>
+      <h2>History</h2>
       <ul>
-        {history.map((entry, index) => (
-          <li key={index}>
-            {entry.expression} = {entry.result}
-          </li>
-        ))}
+        {history.length > 0 ? (
+          history.map((item, index) => (
+            <li key={index}>
+              <span>{item}</span>
+            </li>
+          ))
+        ) : (
+          <li>No history yet</li>
+        )}
       </ul>
-      <button onClick={clearHistory} className='button-clear'>
-        <FaTrash /> <span>Clear</span>
+      <button className='button-clear' onClick={handleClearHistory}>
+        Clear History
       </button>
     </div>
   )
