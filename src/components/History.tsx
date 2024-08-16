@@ -1,4 +1,5 @@
 import React from 'react'
+import { TbMoodEmpty } from 'react-icons/tb'
 
 interface HistoryProps {
   history: string[]
@@ -21,7 +22,9 @@ const History: React.FC<HistoryProps> = ({ history, setHistory }) => {
             </li>
           ))
         ) : (
-          <li>No history yet</li>
+          <li className='display-empty'>
+            <TbMoodEmpty /> <br /> No history yet
+          </li>
         )}
       </ul>
       <button className='button-clear' onClick={handleClearHistory}>

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { TbPlusMinus } from 'react-icons/tb'
-import React, { useReducer } from 'react'
+import React, { useReducer, useEffect } from 'react'
 import { calculatorReducer, initialState } from '../Reducer/calculatorReducer'
 import { GoHistory } from 'react-icons/go'
 import { useNavigate } from 'react-router-dom'
@@ -10,9 +10,21 @@ interface CalculatorProps {
   setHistory: React.Dispatch<React.SetStateAction<string[]>>
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Calculator: React.FC<CalculatorProps> = ({ history, setHistory }) => {
   const [state, dispatch] = useReducer(calculatorReducer, initialState)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (
+      state.result !== 'Ans = 0' &&
+      state.result !== 'Cannot divide by zero' &&
+      state.result !== 'Infinity' &&
+      state.result !== 'Error'
+    ) {
+      setHistory((prevHistory) => [...prevHistory, state.result])
+    }
+  }, [state.result, setHistory])
 
   const handleClick = (char: string) => {
     // Giới hạn phép toán đến 26 ký tự
@@ -40,9 +52,6 @@ const Calculator: React.FC<CalculatorProps> = ({ history, setHistory }) => {
   const handleEvaluate = () => {
     if (!state.error && state.calculation.length > 0) {
       dispatch({ type: 'EVALUATE' })
-
-      const newResult = state.result
-      setHistory([...history, newResult])
     }
   }
 
