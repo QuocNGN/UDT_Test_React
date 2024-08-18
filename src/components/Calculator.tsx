@@ -3,7 +3,7 @@ import { TbPlusMinus } from 'react-icons/tb'
 import React, { useReducer, useEffect } from 'react'
 import { calculatorReducer, initialState } from '../Reducer/calculatorReducer'
 import { GoHistory } from 'react-icons/go'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 interface CalculatorProps {
   history: string[]
@@ -14,6 +14,7 @@ interface CalculatorProps {
 const Calculator: React.FC<CalculatorProps> = ({ history, setHistory }) => {
   const [state, dispatch] = useReducer(calculatorReducer, initialState)
   const navigate = useNavigate()
+  const location = useLocation()
 
   useEffect(() => {
     if (
@@ -28,7 +29,7 @@ const Calculator: React.FC<CalculatorProps> = ({ history, setHistory }) => {
 
   const handleClick = (char: string) => {
     // Giới hạn phép toán đến 26 ký tự
-    if (state.calculation.length < 20 && !state.error) {
+    if (state.calculation.length < 26 && !state.error) {
       dispatch({ type: 'ADD_CHAR', payload: char })
     }
   }
@@ -56,7 +57,11 @@ const Calculator: React.FC<CalculatorProps> = ({ history, setHistory }) => {
   }
 
   const handleHistoryNavigation = () => {
-    navigate('/history')
+    if (location.pathname === '/') {
+      navigate('/history')
+    } else {
+      navigate('/')
+    }
   }
 
   return (

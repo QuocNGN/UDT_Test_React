@@ -75,7 +75,7 @@ body {
       align-items: center; // Căn giữa theo chiều dọc nếu cần
       font-size: 26px !important;
       cursor: pointer;
-      transition: .25s;
+      transition: 0.25s;
       &:active {
         transform: translateX(-2px) translateY(-2px);
       }
@@ -141,6 +141,10 @@ body {
   padding-right: 10px;
   font-size: 15px;
   color: #c5cbd1;
+  white-space: nowrap; /* Prevents text from wrapping to the next line */
+  overflow: hidden; /* Ensures the overflowed content is hidden */
+  text-overflow: ellipsis; /* Adds the "..." when content overflows */
+  max-width: 85%; /* Adjust this value based on your layout */
 }
 
 .input-box {
@@ -210,8 +214,9 @@ body {
     max-height: 400px;
     color: #000;
     overflow-y: scroll;
-    font-size: 22px;
+    font-size: 18px;
     word-wrap: break-word;
+    text-align: left;
   }
   li.display-empty {
     height: 100%;
